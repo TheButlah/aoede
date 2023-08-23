@@ -1,3 +1,4 @@
 /target
 /cache
 config.toml
+.DS_Store
