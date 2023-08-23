@@ -183,18 +183,17 @@ impl EventHandler for Handler {
                             .guild(guild_id)
                             .expect("Could not find guild in cache.");
 
-                        // let channel_id = match guild
-                        //     .voice_states
-                        //     .get(&config.discord_user_id.into())
-                        //     .and_then(|voice_state| voice_state.channel_id)
-                        // {
-                        //     Some(channel_id) => channel_id,
-                        //     None => {
-                        //         println!("Could not find user in VC.");
-                        //         continue;
-                        //     }
-                        // };
-                        let channel_id = ChannelId(1143595438801432677);
+                        let channel_id = match guild
+                            .voice_states
+                            .get(&config.discord_user_id.into())
+                            .and_then(|voice_state| voice_state.channel_id)
+                        {
+                            Some(channel_id) => channel_id,
+                            None => {
+                                println!("Could not find user in VC.");
+                                continue;
+                            }
+                        };
 
                         let _handler = manager.join(guild_id, channel_id).await;
 
